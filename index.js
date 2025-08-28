@@ -7,7 +7,7 @@ import env from "dotenv"
 
 env.config()
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -30,6 +30,11 @@ const pool = new Pool(
         port: process.env.PG_PORT,
       }
 );
+
+pool.connect()
+  .then(() => console.log("✅ Connected to Postgres"))
+  .catch(err => console.error("❌ DB Connection Error:", err))
+
 
 
 let items = []
