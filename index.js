@@ -5,24 +5,32 @@ import pg from "pg"
 import date from "./date.js"
 import env from "dotenv"
 
+env.config()
 const app = express()
 const port = 3000
-env.config()
 
 app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(express.static("public"))
 
-const db = new pg.Client({
-  host: process.env.PG_HOST,
-  password: process.env.PG_PASSWORD,
-  database: process.env.PG_DB,
-  user: process.env.PG_USER,
-  port: process.env.PG_PORT,
-})
+const db = new pg.Client(
+  process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+      }
+    : {
+        host: process.env.PG_HOST,
+        user: process.env.PG_USER,
+        password: process.env.PG_PASSWORD,
+        database: process.env.PG_DB,
+        port: process.env.PG_PORT,
+      }
+);
 
-db.connect()
+
+await db.connect()
 
 let items = []
 
