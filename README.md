@@ -1,22 +1,22 @@
-# í³ To-Do List App
+# ï¿½ï¿½ï¿½ To-Do List App
 
 A simple **To-Do List web application** built with **Node.js, Express, EJS, and PostgreSQL**.
 It allows users to **add, edit, delete, and view tasks** while persisting data in a Postgres database.
 
 ---
 
-## íº€ Features
+## ï¿½ï¿½ï¿½ Features
 
-* í³… Display tasks with the current date as the list title.
+* ï¿½ï¿½ï¿½ Display tasks with the current date as the list title.
 * â• Add new tasks to the list.
 * âœï¸ Edit existing tasks.
 * âŒ Delete tasks.
-* í·„ï¸ PostgreSQL database for persistent storage.
-* í´ Environment variables managed with `dotenv`.
+* ï¿½ï¿½ï¿½ï¸ PostgreSQL database for persistent storage.
+* ï¿½ï¿½ï¿½ Environment variables managed with `dotenv`.
 
 ---
 
-## í» ï¸ Tech Stack
+## ï¿½ï¿½ï¿½ï¸ Tech Stack
 
 * **Backend**: Node.js, Express
 * **Frontend**: EJS (Embedded JavaScript templates)
@@ -26,7 +26,7 @@ It allows users to **add, edit, delete, and view tasks** while persisting data i
 
 ---
 
-## í³‚ Project Structure
+## ï¿½ï¿½ï¿½ Project Structure
 
 ```
 .
@@ -90,13 +90,7 @@ The app runs on: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## í³¸ Screenshot (Optional)
-
-*Add a screenshot of your UI here after running the app.*
-
----
-
-## í´® Future Improvements
+## ï¿½ï¿½ï¿½ Future Improvements
 
 * Add task completion status (âœ”ï¸ Done / âŒ Not Done).
 * Support multiple lists (e.g., Work, Personal).
@@ -105,7 +99,7 @@ The app runs on: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## í³œ License
+## ï¿½ï¿½ï¿½ License
 
 This project is licensed under the MIT License.
 
