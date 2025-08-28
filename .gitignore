@@ -1,0 +1,9 @@
+node_modules
+solution.js
+queries.sql
+.env
+.env.development
+.env.production
+.env.test
+.DS_Store
+
