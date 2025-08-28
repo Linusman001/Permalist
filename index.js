@@ -1,7 +1,7 @@
 import express from "express"
 import bodyParser from "body-parser"
 import ejs from "ejs"
-import pg from "pg"
+import pkg from "pg"
 import date from "./date.js"
 import env from "dotenv"
 
@@ -14,7 +14,9 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.static("public"))
 
-const db = new pg.Client(
+const { Pool } = pkg
+
+const pool = new Pool(
   process.env.DATABASE_URL
     ? {
         connectionString: process.env.DATABASE_URL,
@@ -30,13 +32,11 @@ const db = new pg.Client(
 );
 
 
-await db.connect()
-
 let items = []
 
 async function getItems() {
   try {
-    const result = await db.query("SELECT * FROM items ORDER BY id ASC")
+    const result = await pool.query("SELECT * FROM items ORDER BY id ASC")
     return result.rows
   } catch (error) {
     console.log(error)
@@ -46,7 +46,6 @@ async function getItems() {
 
 app.get("/", async (req, res) => {
   items = await getItems()
-  console.log(date.getDate())
   res.render("index.ejs", {
     listTitle: date.getDate(),
     year: date.getYear(),
@@ -57,7 +56,7 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   const item = req.body.newItem
   try {
-    await db.query("INSERT INTO items (title) VALUES ($1)", [item])
+    await pool.query("INSERT INTO items (title) VALUES ($1)", [item])
     res.redirect("/")
   } catch (error) {
     console.log(error)
@@ -69,7 +68,7 @@ app.post("/edit", async (req, res) => {
   const id = req.body.updatedItemId
 
   try {
-    await db.query("UPDATE items SET title = $1 WHERE id = $2", [title, id])
+    await pool.query("UPDATE items SET title = $1 WHERE id = $2", [title, id])
     res.redirect("/")
   } catch (error) {
     console.log(error)
@@ -80,7 +79,7 @@ app.post("/delete", async (req, res) => {
   const id = req.body.deleteItemId.trim()
 
   try {
-    await db.query("DELETE FROM items WHERE id = $1", [id])
+    await pool.query("DELETE FROM items WHERE id = $1", [id])
     res.redirect("/")
   } catch (error) {
     console.log(error)
